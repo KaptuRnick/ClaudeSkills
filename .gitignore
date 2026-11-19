@@ -1,0 +1,6 @@
+# Repo śledzi na razie tylko skille sprintu; reszta skilli zostaje poza gitem.
+/*
+!/.gitignore
+!/sprint-start/
+!/sprint-checkpoint/
+!/end-session/
