@@ -19,7 +19,7 @@ testowe**, **Git**). Komendy z kontraktu uruchamiaj dokładnie.
 ```
 - [ ] 1. Kontrakt przeczytany; wszystko z sesji jest już na teście
 - [ ] 2. Lista elementów z proponowanym statusem → decyzja Andrzeja
-- [ ] 3. Rejestr zapisany i wgrany na test (obwódki / panel w nowych kolorach)
+- [ ] 3. Rejestr zapisany i wgrany na test; wpisy backlogu w całości prod-go zdjęte do „Do wydania”
 - [ ] 4. Lokalny commit (bez tagu, bez pusha)
 - [ ] 5. Krótkie podsumowanie + pełna tabela backlogu
 ```
@@ -44,10 +44,14 @@ sesji go wycofa. Element wydany bez przełącznika → powiedz, że wycofanie wy
 
 **3.** Zapisz statusy w rejestrze (`status`; `naProdukcji` nie zmieniaj). Wgraj rejestr na test komendą z sekcji
 **Znaczniki** i sprawdź wynik weryfikacji.
+**Backlog (decyzja Andrzeja 2026-11-21): checkpoint kończy sprint dla zatwierdzonych zmian.** Wpis backlogu, którego
+wszystkie elementy rejestru mają `prod-go`, znika z backlogu w tym samym checkpoincie; jego opis (kod, co weszło, pole
+zgłoszeń) trafia do sekcji `## Do wydania` na górze changelogu (z niej koniec sesji robi wpis wydania). Wpis z choć jednym
+`prod-nogo` zostaje w backlogu z dopiskiem, które elementy już są GO. Tabela backlogu w kroku 5 nie pokazuje zakończonych.
 
 **4. Commit lokalny**: `git add` konkretnych plików (kod sesji + rejestr), nie `-A`; format i stopka z sekcji **Git**,
 temat `checkpoint: <kody go> go, <kody nogo> nogo`. **Bez** podbijania wersji, tagu, pusha, buildu produkcyjnego,
-changelogu i dokumentacji, nawet gdy kontrakt (pisany przed 2026-11-18) przypisuje je „checkpointowi” — w nowym
+wpisu wydania w changelogu i dokumentacji (sekcja „Do wydania” z kroku 3 to nie wydanie), nawet gdy kontrakt (pisany przed 2026-11-18) przypisuje je „checkpointowi” — w nowym
 przebiegu należą do `end-session`. Pułapki z sekcji Git (np. weryfikacja staged) obowiązują.
 
 **5. Podsumowanie** (krótko): `go:` kody i nazwy · `nogo:` kody i nazwy · do wycofania z produkcji przy końcu sesji ·

@@ -69,7 +69,8 @@ wydaniem (`../sprint-start/reference/znaczniki.md` → Produkcja).
 — tylko gdy widoczne dla użytkowników). **Zamrożenie** od udanego buildu do końca: zero zmian w kodzie i ponownych
 buildów; poprawki zgłoszone w trakcie → lista „po końcu sesji”. Wyjątek: build nieudany.
 
-**7.** Backlog wg sekcji **Dokumenty**: wydane (`prod`) usunięte → changelog; `prod-nogo` zostają w backlogu.
+**7.** Backlog wg sekcji **Dokumenty**: wydane (`prod`) usunięte → changelog (wpisy zakończone checkpointem już są w sekcji
+`## Do wydania` changelogu: zamień ją na wpis wydania); `prod-nogo` zostają w backlogu.
 
 **8. Dokumentacja: bezwarunkowo.** Spec i reszta dokumentacji muszą się zgadzać z kodem **na produkcji** i z decyzjami
 sesji; plik decyzji nie zastępuje speca.
