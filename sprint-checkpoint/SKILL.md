@@ -18,7 +18,7 @@ testowe**, **Git**). Komendy z kontraktu uruchamiaj dokładnie.
 ## Lista kontrolna — skopiuj do odpowiedzi i odhaczaj
 ```
 - [ ] 1. Kontrakt przeczytany; wszystko z sesji jest już na teście
-- [ ] 2. Lista elementów z proponowanym statusem → decyzja Andrzeja
+- [ ] 2. Lista elementów z proponowanym statusem (ukryte = GO automatycznie) → decyzja Andrzeja
 - [ ] 3. Rejestr zapisany i wgrany na test; wpisy backlogu w całości prod-go zdjęte do „Do wydania”
 - [ ] 4. Lokalny commit (bez tagu, bez pusha)
 - [ ] 5. Krótkie podsumowanie + pełna tabela backlogu
@@ -37,7 +37,10 @@ wpisu (dopisz je: `rodzaj` `ui` albo `ukryta`, `opis` dla ukrytych):
 
 Propozycja: punkt potwierdzony przez Andrzeja z listy „Do sprawdzenia” → `prod-go` (reguła „ok” = GO z
 `../sprint-start/SKILL.md`, pkt 7: takie elementy mają już `prod-go` w rejestrze i nie wymagają ponownej zgody); niepotwierdzony, z uwagami albo
-nowy → `prod-nogo`. Wpis `prod-nogo` z wcześniejszych sesji zostaje `nogo`, chyba że Andrzej potwierdził go w tej.
+nowy → `prod-nogo`. **Zmiany niewidoczne (`rodzaj: ukryta`) → `prod-go` automatycznie** (decyzja Andrzeja 2026-11-21: nie da
+się ich obejrzeć na teście, więc nie czekają na „ok”), chyba że Andrzej wprost oznaczył je jako nogo albo zgłosił do nich
+uwagę; tak samo `ukryta` z wcześniejszych sesji. Pozostałe wpisy `prod-nogo` z wcześniejszych sesji zostają `nogo`, chyba
+że Andrzej potwierdził je w tej.
 Zmiana „bez przełącznika” (migracja, dane) → osobny wiersz z ostrzeżeniem. Pod tabelą jedno pytanie: „Potwierdzasz czy
 zmieniasz?” Andrzej może też oznaczyć `prod-nogo` element już wydany (`prod`) — wtedy `naProdukcji: true`, a koniec
 sesji go wycofa. Element wydany bez przełącznika → powiedz, że wycofanie wymaga rewertu, i dopisz zadanie do backlogu.

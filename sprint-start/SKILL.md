@@ -99,6 +99,8 @@ odpowiedzi jest błędem skilla. Jeśli cel podał już w poleceniu, tabela i ta
 7. **„ok” = GO (decyzja Andrzeja 2026-11-18):** „ok” przy punkcie listy „Do sprawdzenia” to `prod-go` elementu, którego
    dotyczy. Element dostaje `prod-go`, gdy wszystkie jego punkty mają „ok”; uwaga albo „ok, ale…” → zostaje `prod-nogo`
    i wraca na listę po poprawce. Status wpisz do rejestru od razu i wgraj z najbliższym wgraniem na test.
+   Zmiany niewidoczne (`ukryta`) checkpoint oznacza `prod-go` sam, bez „ok” (decyzja Andrzeja 2026-11-21), chyba że
+   Andrzej wprost da im nogo albo uwagę.
 8. `prod-nogo` nie znika z testu: przechodzi na kolejne sesje z czerwoną obwódką, aż checkpoint da `prod-go`.
 Kontrakt z `brak` w sekcji testu: pkt 2–4 nie obowiązują, lista „co przetestować” przychodzi po wydaniu w końcu sesji.
 
