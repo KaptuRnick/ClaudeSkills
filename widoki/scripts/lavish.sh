@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Wrapper na Lavish z przypiętą wersją. Blokuje `share` (publiczny upload na ht-ml.app).
+. "$(dirname "$0")/env.sh"
 # Użycie: lavish.sh <argumenty lavish-axi>   np.  lavish.sh docs/html/backlog/backlog.html
 LAVISH_VERSION="${LAVISH_VERSION:-0.1.98}"
 for a in "$@"; do

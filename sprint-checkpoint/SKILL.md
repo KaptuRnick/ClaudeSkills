@@ -62,8 +62,8 @@ hash commita. Listy „Do sprawdzenia” z niepotwierdzonymi punktami nie kasuj 
 Pod podsumowaniem **zawsze pełna tabela backlogu** (decyzja Andrzeja 2026-11-18) wg
 `../sprint-start/reference/tabela-backlogu.md` i kolumn z kontraktu: cała lista, bez skrótów. Bez pytania „co dalej”.
 
-## Widok HTML (opcjonalny dodatek)
-Po zwykłym wyniku w czacie (który zostaje pełny tekstowo) wywołaj skill `widoki` wg jego sekcji „Podpięcie pod sprint-start, checkpoint i end-session” — po kroku 5: regeneracja Backlogu i strony sesji. Brak skilla `widoki` albo Node → pomiń bez słowa; błąd generatora nie blokuje kroku.
+## Widok HTML (obowiązkowy krok końcowy)
+Po kroku 5, w tej samej turze, uruchom `~/.claude/skills/widoki/scripts/sprint-widok.sh <backlog z kontraktu> "<Projekt>"` i przepisz zwróconą linię z adresem do odpowiedzi. Skrypt sam obsługuje brak Node i błędy (jedna linia „widok HTML pominięty: …”, kod 0); nie pomijaj uruchomienia.
 
 ## Samodoskonalenie
 Krok nie udał się z powodu, którego kontrakt nie opisuje → zaproponuj konkretną regułę do `SPRINT.md`; dopisz po

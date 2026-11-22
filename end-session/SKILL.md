@@ -120,8 +120,8 @@ go i obwódkę i znikają z panelu „Zmiany”; zostają tylko `prod-nogo` (cze
 backlogu. Bez listy „Do sprawdzenia” (sprawdzono na
 teście); wyjątek: `brak` w sekcji **Środowisko testowe** → lista „co przetestować” po wydaniu. Nie pytaj „co dalej”.
 
-## Widok HTML (opcjonalny dodatek)
-Po domknięciu z kroku 11 (zwykły wynik w czacie zostaje pełny tekstowo) wywołaj skill `widoki` wg jego sekcji „Podpięcie pod sprint-start, checkpoint i end-session”: raport wydania z osią statusów, backlog i strona sesji z zakładką Sesja. Brak skilla `widoki` albo Node → pomiń bez słowa; błąd generatora nie blokuje wydania (raport powstaje po commicie i nie wchodzi do niego).
+## Widok HTML (obowiązkowy krok końcowy)
+Po domknięciu z kroku 11, w tej samej turze: raport wydania `node ~/.claude/skills/widoki/scripts/raport.mjs <CHANGELOG> <nr> docs/html/reports/checkpoint-<nr>.html --znaczniki <rejestr>` (po commicie wydania, nie wchodzi do niego), potem `~/.claude/skills/widoki/scripts/sprint-widok.sh <backlog z kontraktu> "<Projekt>"` (zakładka Sesja dołącza się sama) i przepisz linię z adresem. Błędy: jedna linia „widok HTML pominięty: …”, nie blokują wydania.
 
 ## Samodoskonalenie
 Krok nie udał się z powodu, którego kontrakt nie opisuje → zaproponuj konkretną regułę do `SPRINT.md`; dopisz po

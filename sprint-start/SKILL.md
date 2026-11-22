@@ -35,9 +35,11 @@ jako dokładne komendy.
 - [ ] 1b. Środowisko testowe: sekcja kompletna (albo przygotowana z użytkownikiem / świadome „brak”)
 - [ ] 1c. Znaczniki: sekcja kompletna (albo wdrożenie automatycznie jako pierwsze zadanie sesji / świadome „brak”)
 - [ ] 2. Stan: backlog, wersja, ostatnie zmiany, git, elementy prod-go / prod-nogo z rejestru
+- [ ] 2b. Widok HTML: `sprint-widok.sh` uruchomiony i adres strony podany (PRZED triażem i przed każdym pytaniem)
 - [ ] 3. Zgłoszenia: zebrane, przefiltrowane, striażowane po jednym (albo: brak źródeł)
 - [ ] 4. Pełna tabela backlogu + zasady pracy w sprincie (w TEJ SAMEJ odpowiedzi co pytanie o cel, tabela pierwsza)
 - [ ] 5. Cel sprintu: pytanie o jedno zdanie pod tabelą (ustnie, nie do backlogu)
+- [ ] 6. Plan celu: po ustaleniu celu plan jako zakładka „Plan” strony sesji (plik w `docs/html/plans/`), NIE jako tekst w czacie
 ```
 
 **1. Kontrakt.** Znajdź korzeń repo (`git rev-parse --show-toplevel`) i przeczytaj `SPRINT.md` w całości (ma spis
@@ -66,6 +68,12 @@ changelogu, bieżąca wersja, `git log --oneline -5`, bieżąca gałąź i nieza
 w repo — zgłoś Andrzejowi, nie ruszaj ich. Rejestr znaczników: wypisz `prod-go` (czeka na koniec sesji) i `prod-nogo`
 (czeka w teście, z poprzednich sesji) — kod, nazwa, widok; zaznacz te z `naProdukcji: true` (do wycofania).
 
+**2b. Widok HTML — OBOWIĄZKOWY, tu, a nie na końcu.** Zaraz po kroku 2, w tej samej turze, **przed triażem i przed jakimkolwiek pytaniem** (triaż i pytanie o cel kończą turę, więc krok „po” nigdy by się nie wykonał). Jeśli w kontekście jest linia „HOOK widoki …”, hook zrobił to już za Ciebie: przepisz adres, **od razu uruchom narzędzie Monitor wg linii „WYMAGANE TERAZ” z hooka** (komentarze z Lavisha budzą Cię na żywo; bez tego użytkownik widzi „agent not listening”) i idź dalej. Inaczej jedno polecenie z korzenia repo:
+```bash
+~/.claude/skills/widoki/scripts/sprint-widok.sh <ścieżka backlogu z kontraktu> "<Projekt>"
+```
+Skrypt sam tworzy `docs/html/…`, dopisuje do `.gitignore`, generuje backlog i stronę sesji i drukuje jedną linię z adresem — przepisz ją do odpowiedzi. Błąd skryptu to jedna linia „widok HTML pominięty: …” (kod 0), nie blokuje sprintu. Czat zostaje pełny tekstowo (tabela itd.); strona to dodatek, ale jej **uruchomienie nie jest opcjonalne**. Po wyniku triażu i ustaleniu celu uruchom skrypt ponownie (backlog się zmienił).
+
 **3. Zgłoszenia.** Sekcja **Zgłoszenia** kontraktu podaje źródła (np. panel błędów, issues) i reguły. Brak źródeł → krok
 pominięty, napisz to. Są źródła → procedura z `reference/triaz.md`: zbierz, odfiltruj (już w backlogu / naprawione),
 scal pokrewne, **każde zgłoszenie osobno** przez okna pytań, zapis do backlogu, nagrody i oznaczenie obsłużonych —
@@ -79,9 +87,6 @@ odpowiedzi jest błędem skilla. Jeśli cel podał już w poleceniu, tabela i ta
   bez „TOP 10”, bez „pokażę po wyborze celu”; nie pytaj „co dalej”.
 - **Cel:** jedno zdanie (przy BLITZ: filtr ścieżki krytycznej — minimalny zbiór działań, reszta do backlogu). Możesz
   dodać krótką rekomendację celu, ale pod tabelą, nie zamiast niej. Wybór zadań jest ustny — nie zapisuj go w backlogu.
-
-## Widok HTML (opcjonalny dodatek)
-Po zwykłym wyniku w czacie (który zostaje pełny tekstowo) wywołaj skill `widoki` wg jego sekcji „Podpięcie pod sprint-start, checkpoint i end-session” — po tabeli i pytaniu o cel: strona sesji z zakładką Backlog. Brak skilla `widoki` albo Node → pomiń bez słowa; błąd generatora nie blokuje kroku.
 
 ## Zasady pracy w sprincie (obowiązują od startu do końca sesji)
 1. Zmiana skończona, gdy działa i przechodzą szybkie bramy z kontraktu (testy, typy). Od razu ma wpis w rejestrze
@@ -110,3 +115,10 @@ Kontrakt z `brak` w sekcji testu: pkt 2–4 nie obowiązują, lista „co przete
 ## Gdy coś nie pasuje do kontraktu
 Krok się nie udał z powodu, którego `SPRINT.md` nie opisuje (np. zmieniona ścieżka, nowe źródło zgłoszeń) → na końcu
 zaproponuj konkretną poprawkę kontraktu; zapisz ją dopiero po akceptacji Andrzeja.
+
+**6. Plan celu (po ustaleniu celu, przed kodem).** Plan NIGDY nie idzie do czatu jako tekst. Skopiuj
+`<S>/assets/szablon-plan.html` do `docs/html/plans/<data>-<temat>.html`, wypełnij go (zasady i bloki: skill `widoki`,
+etap „Plan”) i zapisz narzędziem Write. Zapis uruchamia hook PostToolUse (`hook-post.sh`), który sam odświeża stronę
+sesji i dodaje zakładkę „Plan”. Użytkownikowi podaj wyłącznie adres strony sesji (jedna strona z zakładkami
+Backlog / Plan / Sesja), nigdy osobny link do pliku planu. W czacie zostaje najwyżej jedno zdanie streszczenia.
+Nie otwieraj planu osobno przez `lavish.sh`. Brak hooka w kontekście po zapisie → uruchom `sprint-widok.sh` ręcznie.

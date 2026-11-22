@@ -36,17 +36,13 @@ Strona planu: kopiuj `assets/szablon-plan.html` (bloki: przed/po, diagram, oś c
 - Strona sesji: `node scripts/sesja.mjs docs/html/sessions/sesja.html --tab "Sesja=raport.html" --tab "Backlog=backlog.html" --tab "Plan=plan.html"`: jedna strona z paskiem zakładek, widoki w ramkach iframe. Po zmianie widoku wygeneruj go i stronę sesji ponownie. Ograniczenie: adnotacje Lavish w ramkach mogą nie działać; do adnotowania otwórz pojedynczy widok.
 
 ### Podpięcie pod sprint-start, checkpoint i end-session (etap 5)
-Skille sprintu wołają ten skill po swoim zwykłym wyniku. **Czat zostaje pełny tekstowo jak dotąd, strona to dodatek.** Warunki: istnieje `~/.claude/skills/widoki` i Node 22+; inaczej krok pomijasz bez słowa. Błąd generatora nie blokuje sprintu: jedna linia „widok HTML pominięty: <powód>”.
-Wspólna procedura (`<S>` = katalog skilla `widoki`, ścieżki z kontraktu projektu `SPRINT.md` → Dokumenty):
-1. Katalog `docs/html/{backlog,plans,reports,sessions}/`; przy pierwszym użyciu dopisz `docs/html/backlog/` i `docs/html/sessions/` do `.gitignore` projektu i powiedz o tym jednym zdaniem.
-2. Backlog: `node <S>/scripts/backlog.mjs <backlog> docs/html/backlog/backlog.html --title "<Projekt> — Backlog"`.
-3. Strona sesji: `node <S>/scripts/sesja.mjs docs/html/sessions/sesja.html --title "Sesja <Projekt>" --tab "Backlog=docs/html/backlog/backlog.html"` plus zakładki, które istnieją: `--tab "Plan=…"` (plan sprintu z `docs/html/plans/`), `--tab "Sesja=…"` (ostatni raport z `docs/html/reports/`).
-4. Pierwszy raz w sesji: `<S>/scripts/lavish.sh docs/html/sessions/sesja.html` i `poll` jako zadanie tła (zasady wyżej). Kolejne razy tylko regeneracja: Lavish odświeża stronę sam. Nie otwieraj ponownie zakończonej sesji bez prośby.
-5. W czacie jedna linia z adresem strony. Nigdy `share`.
+Skille sprintu uruchamiają **jedno polecenie**: `<S>/scripts/sprint-widok.sh <backlog.md> "<Projekt>"` (z korzenia repo). Skrypt tworzy `docs/html/{backlog,plans,reports,sessions}/`, dopisuje `docs/html/backlog/` i `docs/html/sessions/` do `.gitignore`, generuje backlog i stronę sesji (zakładki Plan i Sesja dołączają się same, gdy istnieją najnowsze pliki w `plans/` i `reports/`) i drukuje linię z adresem. Brak Node albo błąd generatora → jedna linia „widok HTML pominięty: <powód>”, kod 0.
+**Czat zostaje pełny tekstowo; strona to dodatek, ale uruchomienie skryptu jest obowiązkowe.**
 Moment wywołania:
-- **sprint-start:** po tabeli backlogu i pytaniu o cel (kroki 2–3 powyżej). Gdy cel już ustalony i powstał plan, zakładka Plan (plan wizualny wg szablonu, zasada 6).
-- **sprint-checkpoint:** po kroku 5; regeneruje Backlog (zniknęły zatwierdzone wpisy) i stronę sesji.
-- **end-session:** w kroku 11 po domknięciu: `node <S>/scripts/raport.mjs <CHANGELOG> <nr> docs/html/reports/checkpoint-<nr>.html --znaczniki <rejestr>` (oś statusów; szkice ekranów opcjonalnie, rysowane wg zasady 6), potem Backlog i strona sesji z zakładką Sesja. Raport powstaje po commicie wydania i nie jest do niego dodawany; commit raportu tylko na prośbę.
+- **sprint-start:** krok 2b, zaraz po stanie, PRZED triażem i pytaniami (triaż i pytanie o cel kończą turę; krok po nich nigdy się nie wykonywał). Po ustaleniu celu ponownie (backlog się zmienił). Plan wizualny (zasada 6) zaraz po ustaleniu celu, przed kodem: plik w `plans/`, zapis odświeża stronę sesji hookiem `hook-post.sh` (zakładka „Plan”). Plan nigdy jako tekst w czacie i nigdy jako osobny link.
+- **sprint-checkpoint:** po kroku 5, w tej samej turze.
+- **end-session:** po kroku 11: `node <S>/scripts/raport.mjs <CHANGELOG> <nr> docs/html/reports/checkpoint-<nr>.html --znaczniki <rejestr>` (szkice ekranów opcjonalnie), potem skrypt. Raport powstaje po commicie wydania i nie jest do niego dodawany.
+Otwarcie w Lavish (`lavish.sh` + `poll` jako zadanie tła) tylko na prośbę użytkownika albo gdy chce adnotować; nigdy `share`.
 
 ### Triaż i edytory (kolejne etapy)
 Zaplanowane, jeszcze niezbudowane: triaż zgłoszeń i edytory z eksportem do .md. Do czasu budowy: nie udawaj, że istnieją.
