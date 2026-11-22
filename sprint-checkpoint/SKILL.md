@@ -62,6 +62,9 @@ hash commita. Listy „Do sprawdzenia” z niepotwierdzonymi punktami nie kasuj 
 Pod podsumowaniem **zawsze pełna tabela backlogu** (decyzja Andrzeja 2026-11-18) wg
 `../sprint-start/reference/tabela-backlogu.md` i kolumn z kontraktu: cała lista, bez skrótów. Bez pytania „co dalej”.
 
+## Widok HTML (opcjonalny dodatek)
+Po zwykłym wyniku w czacie (który zostaje pełny tekstowo) wywołaj skill `widoki` wg jego sekcji „Podpięcie pod sprint-start, checkpoint i end-session” — po kroku 5: regeneracja Backlogu i strony sesji. Brak skilla `widoki` albo Node → pomiń bez słowa; błąd generatora nie blokuje kroku.
+
 ## Samodoskonalenie
 Krok nie udał się z powodu, którego kontrakt nie opisuje → zaproponuj konkretną regułę do `SPRINT.md`; dopisz po
 akceptacji.

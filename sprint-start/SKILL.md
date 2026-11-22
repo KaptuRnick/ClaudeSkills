@@ -80,6 +80,9 @@ odpowiedzi jest błędem skilla. Jeśli cel podał już w poleceniu, tabela i ta
 - **Cel:** jedno zdanie (przy BLITZ: filtr ścieżki krytycznej — minimalny zbiór działań, reszta do backlogu). Możesz
   dodać krótką rekomendację celu, ale pod tabelą, nie zamiast niej. Wybór zadań jest ustny — nie zapisuj go w backlogu.
 
+## Widok HTML (opcjonalny dodatek)
+Po zwykłym wyniku w czacie (który zostaje pełny tekstowo) wywołaj skill `widoki` wg jego sekcji „Podpięcie pod sprint-start, checkpoint i end-session” — po tabeli i pytaniu o cel: strona sesji z zakładką Backlog. Brak skilla `widoki` albo Node → pomiń bez słowa; błąd generatora nie blokuje kroku.
+
 ## Zasady pracy w sprincie (obowiązują od startu do końca sesji)
 1. Zmiana skończona, gdy działa i przechodzą szybkie bramy z kontraktu (testy, typy). Od razu ma wpis w rejestrze
    znaczników (`prod-nogo`; `rodzaj` `ui` albo `ukryta` z `opis`) i siedzi za przełącznikiem (`reference/znaczniki.md`).
