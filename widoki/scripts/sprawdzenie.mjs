@@ -6,6 +6,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { kartyHtml } from './sprawdzenie-karty.mjs';
+import { STYL_DECYZJI } from './sprawdzenie-decyzje.mjs';
 import { mdNaHtml } from './sprawdzenie-md.mjs';
 import { SKRYPT } from './sprawdzenie-skrypt.mjs';
 import { STYL } from './sprawdzenie-styl.mjs';
@@ -16,7 +17,7 @@ const tresc = src.endsWith('.json') ? kartyHtml(JSON.parse(readFileSync(src, 'ut
 
 writeFileSync(out, `<!doctype html>
 <html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Do sprawdzenia</title><style>${STYL}</style></head><body><form class="wrap" id="odp-f">
+<title>Do sprawdzenia</title><style>${STYL}${STYL_DECYZJI}</style></head><body><form class="wrap" id="odp-f">
 ${tresc}
 <section class="uwagi" aria-labelledby="uwagi-h">
 <h2 id="uwagi-h">Dodatkowe uwagi</h2>

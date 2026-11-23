@@ -4,6 +4,7 @@
 // Zdjęcia z <katalog JSON>/zrzuty/NN-przed.png i NN-po.png (robi je skrypt projektu, SPRINT.md → Zrzuty), wklejone base64.
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { decyzjeHtml } from './sprawdzenie-decyzje.mjs';
 import { esc, inline } from './sprawdzenie-md.mjs';
 
 const nr = (n) => String(n).padStart(2, '0');
@@ -36,5 +37,6 @@ export function kartyHtml(lista, kat) {
   const adres = lista.adres ? `<p class="adres"><a href="${esc(lista.adres)}" target="_blank" rel="noopener">${esc(lista.adres)}</a></p>` : '';
   const pods = lista.podsumowanie ? `<p class="pods">${inline(lista.podsumowanie)}</p>` : '';
   const karty = (lista.punkty ?? []).map((p) => (p.ukryta ? kartaUkryta(p) : kartaUi(p, kat))).join('\n');
-  return `<h1>Do sprawdzenia</h1>${adres}${pods}<div class="karty">${karty}</div>`;
+  // Decyzje nad kartami: nie mogą zginąć pod listą punktów (Andrzej 2026-11-23).
+  return `<h1>Do sprawdzenia</h1>${adres}${pods}${decyzjeHtml(lista.decyzje)}<div class="karty">${karty}</div>`;
 }
