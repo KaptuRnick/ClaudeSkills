@@ -17,6 +17,9 @@ case "$CMD" in *"$WZ"*) ;; *) exit 0 ;; esac
 mkdir -p docs/html/sessions && date '+%F %T' > docs/html/sessions/.wgranie-test
 B=""; for f in BACKLOG.md docs/BACKLOG.md docs/backlog.md backlog.md; do [ -f "$f" ] && { B="$f"; break; }; done
 OUT=""; [ -n "$B" ] && OUT="$("$S/sprint-widok.sh" "$B" "$(basename "$ROOT")" 2>&1)"
+if grep -qE '^[-*] *Zrzuty' SPRINT.md; then
+  PLIK=docs/html/sessions/do-sprawdzenia.json; JAK="Punkty interfejsu z polem zrzut (ekran, przed, wskaz, akcja, po); zapis sam robi zdjęcia i karty."
+else PLIK=docs/html/sessions/do-sprawdzenia.md; JAK="Zapis odświeża zakładkę „Do sprawdzenia”."; fi
 jq -n --arg c "HOOK widoki: wykryte wgranie na test ($WZ), strona sesji odświeżona.
-WYMAGANE przed odpowiedzią: zapisz narzędziem Write plik docs/html/sessions/do-sprawdzenia.md: nagłówek z adresem testu, jedno zdanie co weszło, potem numerowana lista „Do sprawdzenia” (akcja → oczekiwany wynik, z kodem #NN) ze WSZYSTKIMI niepotwierdzonymi punktami. Zapis odświeża zakładkę „Do sprawdzenia”; bez niego hook Stop zatrzyma odpowiedź.
+WYMAGANE przed odpowiedzią: zapisz narzędziem Write $PLIK ze WSZYSTKIMI niepotwierdzonymi punktami „Do sprawdzenia”, także zmianami ukrytymi (format: skill widoki → „Po wgraniu na test”). $JAK Bez tego hook Stop zatrzyma odpowiedź.
 $OUT" '{hookSpecificOutput:{hookEventName:"PostToolUse",additionalContext:$c}}'

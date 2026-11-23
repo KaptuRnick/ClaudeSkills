@@ -44,10 +44,22 @@ Moment wywołania:
 - **end-session:** po kroku 11: `node <S>/scripts/raport.mjs <CHANGELOG> <nr> docs/html/reports/checkpoint-<nr>.html --znaczniki <rejestr>` (szkice ekranów opcjonalnie), potem skrypt. Raport powstaje po commicie wydania i nie jest do niego dodawany.
 Otwarcie w Lavish (`lavish.sh` + `poll` jako zadanie tła) tylko na prośbę użytkownika albo gdy chce adnotować; nigdy `share`.
 
-### Po wgraniu na test: zakładka „Do sprawdzenia” (od 2026-11-23, wymuszone hookami)
-Po każdym wgraniu na test agent zapisuje narzędziem Write `docs/html/sessions/do-sprawdzenia.md`: nagłówek z adresem testu, jedno zdanie co weszło, numerowana lista „Do sprawdzenia” (akcja → wynik, kod `#NN`) ze wszystkimi niepotwierdzonymi punktami. `sprint-widok.sh` robi z niej pierwszą zakładkę strony sesji (`scripts/sprawdzenie.mjs`). Nie polega to na pamięci modelu:
-- `hook-test.sh` (PostToolUse, Bash): komenda wgrania z `SPRINT.md` (linia „Wgranie”, pierwszy fragment w backtickach) → odświeża stronę sesji, zostawia znacznik `docs/html/sessions/.wgranie-test` i każe zapisać listę;
-- `hook-post.sh` (PostToolUse, Write|Edit): zapis listy, planu albo raportu → odświeża stronę sesji;
+### Po wgraniu na test: zakładka „Do sprawdzenia” jako karty ze zrzutami (od 2026-11-23, wymuszone hookami)
+Widok ma pokazywać, nie opisywać (Andrzej 2026-11-23). Po każdym wgraniu na test agent zapisuje narzędziem Write `docs/html/sessions/do-sprawdzenia.json`
+(projekt z linią „Zrzuty” w `SPRINT.md`; bez niej zapasowo `.md` z numerowaną listą):
+```json
+{ "adres": "<adres testu>", "podsumowanie": "<jedno zdanie: co weszło>", "punkty": [
+  { "nr": 2, "kod": "#124a", "akcja": "Stuknij „Menu ›”", "wynik": "Otwiera się Menu",
+    "zrzut": { "ekran": "<ekran startowy skryptu projektu>", "przed": [{ "kliknij": "<sel>" }], "wskaz": "<sel do obwiedzenia>",
+               "akcja": [{ "kliknij": "<sel>" }], "po": true } },
+  { "nr": 11, "kod": "#124d", "ukryta": true, "akcja": "<nazwa zmiany>", "zmiana": "<co się zmieniło>", "jak": "<jak sprawdzić>",
+    "regula": "<zdanie reguły silnika do potwierdzenia>" } ] }
+```
+- Każdy niepotwierdzony punkt, **także każda zmiana `ukryta`** (karta bez zdjęć: co, jak sprawdzić, reguła do potwierdzenia „NN tak ma działać”).
+- `zrzut`: `akcja` domyślnie kliknięcie `wskaz`; `"po": false` = tylko zdjęcie „ma być” (stan bez akcji). Brak `zrzut` = karta z samym tekstem.
+- Zdjęcia robi skrypt projektu z `SPRINT.md` (linia „Zrzuty”, pierwszy fragment w backtickach) do `docs/html/sessions/zrzuty/NN-przed.png` i `NN-po.png`; `scripts/sprawdzenie.mjs` (+ `sprawdzenie-karty.mjs`, `sprawdzenie-md.mjs`) składa karty z obrazami w środku jako pierwszą zakładkę strony sesji. W czacie zostaje ta sama lista tekstowa (odpowiedzi „NN ok”).
+- `hook-test.sh` (PostToolUse, Bash): komenda wgrania z `SPRINT.md` (linia „Wgranie”) → odświeża stronę, zostawia znacznik `docs/html/sessions/.wgranie-test`, każe zapisać listę;
+- `hook-post.sh` (PostToolUse, Write|Edit, timeout 300): zapis `.json` → skrypt zrzutów, potem strona sesji; `.md`, planu albo raportu → strona sesji;
 - `hook-stop.sh` (Stop): po wgraniu bez nowszej listy zatrzymuje zakończenie odpowiedzi (raz na turę).
 Okno Lavisha nie ma „Send & End”, „End session” ani „Publish link” (`scripts/lavish-latka.sh` na przypiętej wersji, wołany przez `lavish.sh`), a `sprint-widok.sh` otwiera sesję z `--reopen`, więc strona sesji zawsze wraca i jest aktualna.
 

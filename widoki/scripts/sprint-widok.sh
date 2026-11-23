@@ -17,8 +17,8 @@ if [ -f .gitignore ]; then
 fi
 "$NODE" "$S/scripts/backlog.mjs" "$BACKLOG" docs/html/backlog/backlog.html --title "$PROJ — Backlog" >/dev/null || skip "backlog.mjs"
 TABS=()
-# „Do sprawdzenia” (ostatnie wgranie na test: podsumowanie i lista) jako pierwsza zakładka, gdy agent zapisał listę.
-DS=docs/html/sessions/do-sprawdzenia.md
+# „Do sprawdzenia” (ostatnie wgranie na test) jako pierwsza zakładka: karty ze zrzutami z .json, zapasowo lista z .md.
+DS=docs/html/sessions/do-sprawdzenia.json; [ -f "$DS" ] || DS=docs/html/sessions/do-sprawdzenia.md
 if [ -f "$DS" ] && "$NODE" "$S/scripts/sprawdzenie.mjs" "$DS" docs/html/sessions/do-sprawdzenia.html >/dev/null; then
   TABS+=(--tab "Do sprawdzenia=docs/html/sessions/do-sprawdzenia.html")
 fi
