@@ -7,3 +7,11 @@ if ! command -v npx >/dev/null 2>&1 || ! command -v node >/dev/null 2>&1; then
     if [ -x "$d/node" ] && [ -x "$d/npx" ]; then PATH="$d:$PATH"; export PATH; break; fi
   done
 fi
+# Sesja w VSCode (Claude Code w VSCode albo terminal VSCode): strony otwiera wbudowana przeglądarka VSCode
+# (`code --open-url`, wymaga ustawienia "workbench.browser.openLocalhostLinks": true), nie systemowa.
+if [ -z "${WIDOKI_VSCODE:-}" ]; then
+  WIDOKI_VSCODE=0
+  case "${CLAUDE_CODE_ENTRYPOINT:-}" in claude-vscode*) WIDOKI_VSCODE=1 ;; esac
+  [ "${TERM_PROGRAM:-}" = "vscode" ] && WIDOKI_VSCODE=1
+  export WIDOKI_VSCODE
+fi

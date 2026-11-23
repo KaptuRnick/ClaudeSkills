@@ -9,7 +9,7 @@ Widok HTML dla człowieka. **Czat nadal podaje wszystko tekstowo jak dotąd; str
 
 ## Zasady
 1. Pliki: `docs/html/<kategoria>/` (`backlog/`, `plans/`, `reports/`, `sessions/`). Commitowane tylko `plans/` i `reports/`; `backlog/` i `sessions/` do `.gitignore`.
-2. Otwieranie zawsze przez `scripts/lavish.sh <plik.html>` (Lavish przypięty do wersji, `npx`, Node 22+). **Nigdy `share`**: wrapper go blokuje (publiczny upload). Do udostępniania służą prywatne artefakty claude.ai.
+2. Otwieranie zawsze przez `scripts/lavish.sh <plik.html>` (Lavish przypięty do wersji, `npx`, Node 22+). **Nigdy `share`**: wrapper go blokuje (publiczny upload). Do udostępniania służą prywatne artefakty claude.ai. W sesji VSCode (`CLAUDE_CODE_ENTRYPOINT=claude-vscode` albo terminal VSCode; `env.sh` → `WIDOKI_VSCODE=1`) wrapper otwiera Lavish z `--no-open` i stronę przez `code --open-url` we wbudowanej przeglądarce VSCode; wymaga raz ustawienia VSCode `"workbench.browser.openLocalhostLinks": true` i restartu. Poza VSCode: przeglądarka systemowa.
 3. Po otwarciu: `lavish.sh poll <plik>` tylko jako śledzony job tła harnessu (run_in_background), nigdy `nohup` / `&`. Bez pollu feedback ze strony czeka na serwerze.
 4. Brak Node / Lavish: HTML działa jako zwykły plik w przeglądarce, bez adnotacji.
 5. Styl: styl projektu, jeśli ma (makiety ekranów zawsze w stylu projektu), inaczej `assets/style.css`. HTML zaczyna się od `<!doctype html>`, plik samowystarczalny (CSS inline).
