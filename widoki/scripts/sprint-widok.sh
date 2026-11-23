@@ -23,7 +23,8 @@ if [ -f "$DS" ] && "$NODE" "$S/scripts/sprawdzenie.mjs" "$DS" docs/html/sessions
   TABS+=(--tab "Do sprawdzenia=docs/html/sessions/do-sprawdzenia.html")
 fi
 TABS+=(--tab "Backlog=docs/html/backlog/backlog.html")
-P="$(ls -t docs/html/plans/*.html 2>/dev/null | head -1)"; [ -n "$P" ] && TABS+=(--tab "Plan=$P")
+# Plan: 10 najnowszych planów, wybór u góry zakładki (najnowszy pierwszy; data, tytuł, status zatwierdzenia).
+P="$(ls -t docs/html/plans/*.html 2>/dev/null | head -10 | paste -sd, -)"; [ -n "$P" ] && TABS+=(--tab "Plan=$P")
 R="$(ls -t docs/html/reports/*.html 2>/dev/null | head -1)"; [ -n "$R" ] && TABS+=(--tab "Sesja=$R")
 "$NODE" "$S/scripts/sesja.mjs" docs/html/sessions/sesja.html --title "Sesja $PROJ" "${TABS[@]}" >/dev/null || skip "sesja.mjs"
 echo "widok HTML: file://$(pwd)/docs/html/sessions/sesja.html"
