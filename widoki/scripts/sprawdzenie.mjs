@@ -32,9 +32,30 @@ a{color:#b5552f}code{font:13.5px ui-monospace,monospace;background:#efe9df;paddi
 .strz{font-size:30px;color:var(--clay)}
 .wynik,.opis{padding:12px 16px;margin:0}.opis p{margin:4px 0}
 .karta footer{padding:0 14px 12px;font-size:12px;color:var(--mute)}
+.uwagi{margin-top:28px;padding:12px 16px;background:#fff;border:1px dashed var(--oat);border-radius:12px}.uwagi h2{font-size:15px;margin:0 0 2px}.uwagi p{margin:0 0 8px;font-size:13px;color:var(--mute)}
+.uwagi textarea{width:100%;font:inherit;font-size:14px;padding:8px;border:1px solid var(--oat);border-radius:8px;resize:vertical}
+.uwagi-akcje{display:flex;align-items:center;gap:10px;margin-top:6px}.uwagi button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--clay);border-radius:8px;background:var(--clay);color:#fff;cursor:pointer}#uwagi-s{font-size:12px;color:var(--mute)}
 ol.md li{margin:10px 0;padding:10px 12px;background:#fff;border:1px solid var(--oat);border-radius:8px}ol.md li::marker{font-weight:700;color:var(--clay)}
 @media (max-width:760px){.zr{grid-template-columns:1fr}.strz{transform:rotate(90deg);justify-self:center}}
 </style></head><body><div class="wrap">
 ${tresc}
-</div></body></html>`);
+<section class="uwagi" aria-labelledby="uwagi-h">
+<h2 id="uwagi-h">Dodatkowe uwagi</h2>
+<p>Obserwacje spoza samych zmian, ważne dla sprintu (trafiają do backlogu).</p>
+<form id="uwagi-f"><textarea id="uwagi-t" rows="3"></textarea>
+<div class="uwagi-akcje"><button type="submit">Wyślij uwagi (razem z komentarzami do kart)</button><span id="uwagi-s" role="status"></span></div></form>
+</section>
+</div>
+<script>
+// Pole „Dodatkowe uwagi” (Andrzej 2026-11-23): tekst idzie do agenta przez Lavish razem z komentarzami do kart.
+document.getElementById('uwagi-f').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const t = document.getElementById('uwagi-t'), s = document.getElementById('uwagi-s'), tekst = t.value.trim();
+  if (!tekst) { s.textContent = 'Wpisz uwagę.'; return; }
+  if (!window.lavish?.queuePrompt) { s.textContent = 'Komentarze działają tylko w Lavishu (adres http://127.0.0.1…).'; return; }
+  window.lavish.queuePrompt('Dodatkowe uwagi do sprintu (spoza zmian): ' + tekst, { tag: 'uwagi-sprintu', text: tekst, element: e.currentTarget });
+  window.lavish.sendQueuedPrompts?.();
+  t.value = ''; s.textContent = 'Wysłane.';
+});
+</script></body></html>`);
 console.log(`OK ${out}`);

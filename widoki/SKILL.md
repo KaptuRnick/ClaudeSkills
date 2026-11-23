@@ -56,6 +56,7 @@ Widok ma pokazywać, nie opisywać (Andrzej 2026-11-23). Po każdym wgraniu na t
     "regula": "<zdanie reguły silnika do potwierdzenia>" } ] }
 ```
 - Każdy niepotwierdzony punkt, **także każda zmiana `ukryta`** (karta bez zdjęć: co, jak sprawdzić, reguła do potwierdzenia „NN tak ma działać”).
+- Pod kartami zawsze pole **„Dodatkowe uwagi”** (obserwacje spoza zmian, ważne dla sprintu): wysyła tekst przez Lavish z tagiem `uwagi-sprintu` razem z komentarzami do kart; agent wpisuje je do backlogu w tej samej turze. Brak uwag i wszystkie punkty „ok” ⇒ checkpoint (zasada 9 `sprint-start`), nigdy koniec sesji.
 - `zrzut`: `akcja` domyślnie kliknięcie `wskaz`; `"po": false` = tylko zdjęcie „ma być” (stan bez akcji). Brak `zrzut` = karta z samym tekstem.
 - Zdjęcia robi skrypt projektu z `SPRINT.md` (linia „Zrzuty”, pierwszy fragment w backtickach) do `docs/html/sessions/zrzuty/NN-przed.png` i `NN-po.png`; `scripts/sprawdzenie.mjs` (+ `sprawdzenie-karty.mjs`, `sprawdzenie-md.mjs`) składa karty z obrazami w środku jako pierwszą zakładkę strony sesji. W czacie zostaje ta sama lista tekstowa (odpowiedzi „NN ok”).
 - `hook-test.sh` (PostToolUse, Bash): komenda wgrania z `SPRINT.md` (linia „Wgranie”) → odświeża stronę, zostawia znacznik `docs/html/sessions/.wgranie-test`, każe zapisać listę;

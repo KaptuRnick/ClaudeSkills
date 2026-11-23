@@ -2,7 +2,8 @@
 name: sprint-checkpoint
 description: >
   Checkpoint sprintu w DOWOLNYM repo: uniwersalny, globalny, lekki. Use when user writes "checkpoint", "zrób
-  checkpoint", "oznacz", "zapisz stan" (sygnał w trakcie sesji, można wielokrotnie). Według kontraktu SPRINT.md (korzeń repo)
+  checkpoint", "oznacz", "zapisz stan" (sygnał w trakcie sesji, można wielokrotnie), ORAZ automatycznie, gdy wszystkie punkty listy
+  „Do sprawdzenia” mają „ok” i nie ma żadnych uwag (zasada 9 sprint-start). Według kontraktu SPRINT.md (korzeń repo)
   oznacza elementy sprintu statusem prod-go / prod-nogo w rejestrze znaczników (zielone / czerwone obwódki 1px i panel
   „Zmiany” na teście), wgrywa rejestr na test i lokalnie commituje zmiany. NIC więcej: bez wersji, bram, buildu,
   dokumentacji, pusha i produkcji. Wydanie na produkcję robi wyłącznie skill end-session ("/end-session", "koniec sesji").

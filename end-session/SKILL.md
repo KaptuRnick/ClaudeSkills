@@ -7,6 +7,7 @@ description: >
   były (na teście zostają z czerwonymi znacznikami na kolejne sesje); podbija wersję, przechodzi bramy jakości w pętli,
   buduje, dostarcza artefakt z notatkami, zamraża kod, aktualizuje backlog, changelog, dziennik i dokumentację, commituje
   z tagiem i pushem, wdraża i weryfikuje, domyka podsumowaniem i pełną tabelą backlogu. Jedyne miejsce wydania produkcyjnego.
+  Tylko na wyraźne polecenie Andrzeja — nigdy sam, także gdy wszystko ma „ok” (wtedy sprint-checkpoint) albo gdy pyta o produkcję.
 ---
 
 # Sprint — koniec sesji (wydanie)
