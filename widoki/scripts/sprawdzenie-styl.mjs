@@ -19,15 +19,16 @@ a{color:#b5552f}code{font:13.5px ui-monospace,monospace;background:#efe9df;paddi
 .opis{padding:12px 16px 0;margin:0}.opis p{margin:4px 0}
 .odp{padding:6px 16px 14px}
 .ma-byc{font-size:17px;font-weight:700;margin:6px 0 10px;line-height:1.35}
-.odp-rzad{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
-.ocena{display:inline-flex;border:1px solid var(--oat);border-radius:999px;overflow:hidden;background:#fff}
-.ocena label{display:flex;align-items:center;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer;color:var(--mute);user-select:none}
-.ocena label+label{border-left:1px solid var(--oat)}
-.ocena input{position:absolute;opacity:0;pointer-events:none}
-.ocena label.tak:has(input:checked){background:var(--ok);color:#fff}.ocena label.nie:has(input:checked){background:var(--nie);color:#fff}
-.ocena label:has(input:focus-visible){outline:3px solid var(--slate);outline-offset:-3px}
-.odp-uwagi,.uwagi textarea{width:100%;font:inherit;font-size:14px;padding:8px;border:1px solid var(--oat);border-radius:8px;resize:vertical}
-.karta:has(.tak input:checked){border-color:#a9c9a4}.karta:has(.nie input:checked){border-color:#e3a49d}
+.odp-rzad{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.przel{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;cursor:pointer;user-select:none}
+.przel input{position:absolute;opacity:0;pointer-events:none}
+.przel .tor{position:relative;width:46px;height:26px;border-radius:13px;background:#d8d2c6;transition:background .15s}
+.przel .tor::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0003;transition:transform .15s}
+.przel input:checked+.tor{background:var(--ok)}.przel input:checked+.tor::after{transform:translateX(20px)}
+.przel input:focus-visible+.tor{outline:3px solid var(--slate);outline-offset:2px}
+.nie-ok{padding:8px 12px;border:1px dashed #e3a49d;border-radius:8px;color:var(--nie);font-size:13.5px}
+.karta:has(.odp-ok:checked){border-color:#a9c9a4}.karta:has(.odp-ok:checked) .nie-ok{opacity:.45}
+.uwagi textarea{width:100%;font:inherit;font-size:14px;padding:8px;border:1px solid var(--oat);border-radius:8px;resize:vertical}
 ol.md li{margin:10px 0;padding:10px 12px;background:#fff;border:1px solid var(--oat);border-radius:8px}ol.md li::marker{font-weight:700;color:var(--clay)}
 .uwagi{margin-top:28px;padding:12px 16px;background:#fff;border:1px dashed var(--oat);border-radius:12px}.uwagi h2{font-size:15px;margin:0 0 2px}.uwagi p{margin:0 0 8px;font-size:13px;color:var(--mute)}
 .wysylka{position:sticky;bottom:0;display:flex;align-items:center;gap:12px;margin-top:16px;padding:10px 16px;background:var(--ivory);border-top:1px solid var(--oat)}

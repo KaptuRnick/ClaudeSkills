@@ -1,6 +1,6 @@
 // Lista „Do sprawdzenia” jako karty (do-sprawdzenia.json): zmiana widoczna = numer, akcja, zrzut „tu stuknij” (ramka na
 // miejscu do kliknięcia) i zrzut „ma się pokazać”; zmiana ukryta = co się zmieniło, jak sprawdzić, reguła do potwierdzenia.
-// Pod każdą kartą wynik jako nagłówek i stałe miejsce odpowiedzi: przełącznik OK / Nie ok i pole Uwagi (Andrzej 2026-11-23).
+// Pod każdą kartą wynik jako nagłówek i stałe miejsce odpowiedzi: przełącznik „OK” i pole „Nie ok” do komentarza (Andrzej 2026-11-23).
 // Zdjęcia z <katalog JSON>/zrzuty/NN-przed.png i NN-po.png (robi je skrypt projektu, SPRINT.md → Zrzuty), wklejone base64.
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -12,10 +12,10 @@ function zdjecie(kat, n, rodzaj, alt) {
   return existsSync(p) ? `<img alt="${esc(alt)}" src="data:image/png;base64,${readFileSync(p).toString('base64')}">` : '';
 }
 
-/** Wynik (nagłówek) i odpowiedź: przełącznik OK / Nie ok, po prawej uwagi; wysyła je przycisk pod listą (sprawdzenie-skrypt.mjs). */
+/** Wynik (nagłówek) i odpowiedź: przełącznik „OK” (domyślnie wyłączony) i obok pole „Nie ok” — zwykły element do skomentowania
+ *  w Lavishu jak reszta strony (Andrzej 2026-11-23). Przełączniki wysyła przycisk pod listą (sprawdzenie-skrypt.mjs). */
 function odpowiedz(p, wynik) {
-  const n = `ocena-${p.nr}`;
-  return `<div class="odp">${wynik ? `<h3 class="ma-byc">${wynik}</h3>` : ''}<div class="odp-rzad"><div class="ocena" role="radiogroup" aria-label="Ocena punktu ${p.nr}"><label class="tak"><input type="radio" name="${n}" value="ok">OK</label><label class="nie"><input type="radio" name="${n}" value="nie ok">Nie ok</label></div><textarea class="odp-uwagi" rows="2" placeholder="Uwagi do punktu ${p.nr}" aria-label="Uwagi do punktu ${p.nr}"></textarea></div></div>`;
+  return `<div class="odp">${wynik ? `<h3 class="ma-byc">${wynik}</h3>` : ''}<div class="odp-rzad"><label class="przel"><input type="checkbox" role="switch" class="odp-ok" aria-label="Punkt ${p.nr}: OK"><span class="tor" aria-hidden="true"></span>OK</label><div class="nie-ok">Nie ok? Skomentuj to pole w Lavishu (punkt ${p.nr}).</div></div></div>`;
 }
 
 function kartaUi(p, kat) {
