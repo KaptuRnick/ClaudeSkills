@@ -33,6 +33,8 @@ nav.sesja-zakladki button:hover{background:#2b2a27}
 nav.sesja-zakladki button[aria-selected=true]{background:#D97757;color:#fff;font-weight:600}
 section[data-widok]{display:block;min-height:calc(100vh - 48px)}
 section[data-widok][hidden]{display:none!important}
+/* Komentarz w kolejce Lavisha (jeszcze niewysłany): ta sama niebieska ramka co komentarz czekający na poprawkę. */
+[data-lavish-w-kolejce]{outline:3px solid #2f80ed!important;outline-offset:3px;border-radius:6px}
 </style>
 ${panels.map((p) => `<style>\n${p.css}\n</style>`).join('\n')}
 <style>
@@ -47,6 +49,10 @@ ${SKRYPT_ZAKRESU}
 const bs=[...document.querySelectorAll('nav.sesja-zakladki button')],ss=[...document.querySelectorAll('section[data-widok]')];
 function show(i){bs.forEach((b,n)=>b.setAttribute('aria-selected',n===i));ss.forEach((s,n)=>{s.hidden=n!==i});try{history.replaceState(null,'','#'+encodeURIComponent(bs[i].textContent))}catch(e){}}
 bs.forEach((b,n)=>b.onclick=()=>show(n));
+// Lavish podaje stronie selektory komentarzy w kolejce (lavish:queuedAnchors): ramka od razu po dodaniu komentarza.
+addEventListener('message',(e)=>{const m=e.data;if(!m||m.type!=='lavish:queuedAnchors')return;
+document.querySelectorAll('[data-lavish-w-kolejce]').forEach((el)=>el.removeAttribute('data-lavish-w-kolejce'));
+for(const s of Array.isArray(m.selectors)?m.selectors:[]){try{document.querySelectorAll(String(s)).forEach((el)=>el.setAttribute('data-lavish-w-kolejce',''))}catch(_){}}});
 const h=decodeURIComponent(location.hash.slice(1)),k=bs.findIndex(b=>b.textContent===h);show(k>=0?k:0);
 ${panels.map((p) => p.js).join('\n')}
 window.lavish?.setDocumentMeta?.({title:${JSON.stringify(title)}});

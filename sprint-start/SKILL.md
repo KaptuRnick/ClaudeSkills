@@ -96,6 +96,8 @@ odpowiedzi jest błędem skilla. Jeśli cel podał już w poleceniu, tabela i ta
    Zmiana mechaniki, wzoru czy logiki bez śladu w interfejsie → wpis `ukryta` z widokiem, którego dotyczy (panel).
 2. Wtedy **od razu, bez pytania** wgraj ją na test komendą z sekcji **Środowisko testowe** i sprawdź wgranie.
 3. Zaraz potem numerowana lista **„Do sprawdzenia”** z adresem testu: akcja → oczekiwany wynik, po punkcie na zmianę.
+   W czacie numer pogrubiony na początku akapitu (`**18.** akcja → wynik`), nie lista Markdown: czat przenumerowuje listę
+   od 1 kolejno (18, 24 → 18, 19) i numery przestają zgadzać się z widokiem (Andrzej 2026-11-23).
    Tę samą listę zapisz narzędziem Write do `docs/html/sessions/do-sprawdzenia.json` (format: skill `widoki` → „Po wgraniu na test”;
    projekt bez linii „Zrzuty” w `SPRINT.md`: `.md`). Zapis robi zrzuty i karty w zakładce „Do sprawdzenia” (hooki `widoki` tego pilnują).
    **Zmiany ukryte też (Andrzej 2026-11-23):** każda zmiana `ukryta` ma swój punkt: co się zmieniło, jak to sprawdzić, a gdy
