@@ -15,7 +15,7 @@ Instalacja: skopiuj folder do `~/.claude/skills/widoki/`.
 | Backlog (lista `- [ ] **KOD — tytuł**` albo wpisy `## #NN [Priorytet] Tytuł` z polami `**Kontekst:**`; format wykrywany sam) | `node scripts/backlog.mjs BACKLOG.md docs/html/backlog/backlog.html --title "Backlog"` |
 | Plan (szybki podgląd z .md; plan wizualny: kopia `assets/szablon-plan.html`) | `node scripts/plan.mjs plan.md out.html [--backlog BACKLOG.md]` |
 | Raport wydania z sekcji CHANGELOG-u, oś statusów z rejestru znaczników, opcjonalne szkice ekranów | `node scripts/raport.mjs CHANGELOG.md 62 out.html [--znaczniki znaczniki.json] [--szkice szkice.json]` |
-| Strona sesji: jedna strona z zakładkami (każda w ramce iframe) | `node scripts/sesja.mjs out.html --tab "Backlog=backlog.html" --tab "Plan=plan.html"` |
+| Strona sesji: jedna strona z zakładkami (sekcje jednego dokumentu, komentarze Lavish w treści) | `node scripts/sesja.mjs out.html --tab "Backlog=backlog.html" --tab "Plan=plan.html"` |
 | Jedno polecenie dla skilli sprintu: backlog + strona sesji, bez zbędnych kroków | `scripts/sprint-widok.sh BACKLOG.md "Projekt"` |
 | Otwarcie w przeglądarce z adnotacjami (Lavish, `share` zablokowany) | `scripts/lavish.sh <plik.html>` |
 
