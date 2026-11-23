@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Wrapper na Lavish z przypiętą wersją. Blokuje `share` (publiczny upload na ht-ml.app).
+# Przed startem łatka chowa „Send & End”, „End session” i „Publish link” (lavish-latka.sh).
 # W sesji VSCode (env.sh → WIDOKI_VSCODE=1) otwarcie widoku idzie do wbudowanej przeglądarki VSCode zamiast systemowej.
 . "$(dirname "$0")/env.sh"
 # Użycie: lavish.sh <argumenty lavish-axi>   np.  lavish.sh docs/html/backlog/backlog.html
@@ -10,6 +11,7 @@ for a in "$@"; do
   fi
 done
 command -v node >/dev/null || { echo "widoki: brak Node. Plik HTML otwórz zwykłą przeglądarką." >&2; exit 4; }
+"$(dirname "$0")/lavish-latka.sh" "$LAVISH_VERSION"
 case "$1" in *.html|*.htm) OTWARCIE=1 ;; *) OTWARCIE=0 ;; esac
 if [ "$WIDOKI_VSCODE" != "1" ] || [ "$OTWARCIE" != "1" ] || [ "${LAVISH_AXI_NO_OPEN:-}" = "1" ] || [[ " $* " == *" --no-open "* ]]; then
   exec npx -y "lavish-axi@${LAVISH_VERSION}" "$@"

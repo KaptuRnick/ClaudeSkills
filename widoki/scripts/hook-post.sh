@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# PostToolUse (Write|Edit): gdy zapisano plik w docs/html/plans/ lub docs/html/reports/, odśwież stronę sesji
-# (zakładki Plan / Sesja) bez polegania na pamięci modelu. Wynik trafia do modelu jako additionalContext.
+# PostToolUse (Write|Edit): gdy zapisano plik w docs/html/plans/, docs/html/reports/ albo listę docs/html/sessions/do-sprawdzenia.md, odśwież stronę sesji
+# (zakładki Do sprawdzenia / Plan / Sesja) bez polegania na pamięci modelu. Wynik trafia do modelu jako additionalContext.
 S="$(cd "$(dirname "$0")" && pwd)"
 . "$S/env.sh"
 command -v jq >/dev/null 2>&1 || exit 0
 IN="$(cat)"
 FP="$(printf '%s' "$IN" | jq -r '.tool_input.file_path // empty')"
-case "$FP" in */docs/html/plans/*.html|*/docs/html/reports/*.html) ;; *) exit 0 ;; esac
+case "$FP" in */docs/html/plans/*.html|*/docs/html/reports/*.html|*/docs/html/sessions/do-sprawdzenia.md) ;; *) exit 0 ;; esac
 ROOT="$(cd "$(dirname "$FP")/../../.." 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null)" || exit 0
 cd "$ROOT" || exit 0
 [ -f SPRINT.md ] || exit 0

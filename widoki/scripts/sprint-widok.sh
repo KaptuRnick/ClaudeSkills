@@ -16,15 +16,22 @@ if [ -f .gitignore ]; then
   done
 fi
 "$NODE" "$S/scripts/backlog.mjs" "$BACKLOG" docs/html/backlog/backlog.html --title "$PROJ — Backlog" >/dev/null || skip "backlog.mjs"
-TABS=(--tab "Backlog=docs/html/backlog/backlog.html")
+TABS=()
+# „Do sprawdzenia” (ostatnie wgranie na test: podsumowanie i lista) jako pierwsza zakładka, gdy agent zapisał listę.
+DS=docs/html/sessions/do-sprawdzenia.md
+if [ -f "$DS" ] && "$NODE" "$S/scripts/sprawdzenie.mjs" "$DS" docs/html/sessions/do-sprawdzenia.html >/dev/null; then
+  TABS+=(--tab "Do sprawdzenia=docs/html/sessions/do-sprawdzenia.html")
+fi
+TABS+=(--tab "Backlog=docs/html/backlog/backlog.html")
 P="$(ls -t docs/html/plans/*.html 2>/dev/null | head -1)"; [ -n "$P" ] && TABS+=(--tab "Plan=$P")
 R="$(ls -t docs/html/reports/*.html 2>/dev/null | head -1)"; [ -n "$R" ] && TABS+=(--tab "Sesja=$R")
 "$NODE" "$S/scripts/sesja.mjs" docs/html/sessions/sesja.html --title "Sesja $PROJ" "${TABS[@]}" >/dev/null || skip "sesja.mjs"
 echo "widok HTML: file://$(pwd)/docs/html/sessions/sesja.html"
 # Komentarze i adnotacje daje tylko edytor Lavish (adres http://127.0.0.1…), nie goły plik file://.
-# Jedna strona sesji z zakładkami (Backlog, Plan, Sesja) jest jedynym adresem z komentarzami.
+# Jedna strona sesji z zakładkami (Do sprawdzenia, Backlog, Plan, Sesja) jest jedynym adresem z komentarzami.
+# --reopen: sesja zamknięta w przeglądarce wraca przy każdym odświeżeniu (Andrzej 2026-11-23: widok ma być zawsze aktualny).
 if [ "${WIDOKI_LAVISH:-1}" != "0" ] && command -v npx >/dev/null 2>&1; then
-  LV="$(timeout 40 "$S/scripts/lavish.sh" docs/html/sessions/sesja.html 2>/dev/null | sed -n 's/^ *url: *"\{0,1\}\([^"]*\)"\{0,1\}$/\1/p' | head -1)"
+  LV="$(timeout 40 "$S/scripts/lavish.sh" docs/html/sessions/sesja.html --reopen 2>/dev/null | sed -n 's/^ *url: *"\{0,1\}\([^"]*\)"\{0,1\}$/\1/p' | head -1)"
   if [ -n "$LV" ]; then
     echo "widok HTML z komentarzami (Lavish): $LV"
     "$S/scripts/lavish-bridge.sh" start docs/html/sessions/sesja.html && echo "most komentarzy uruchomiony: Lavish pokaże „agent listening”; komentarze trafią do czatu przy Twojej następnej wiadomości"

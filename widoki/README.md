@@ -28,7 +28,8 @@ Każdy plik wynikowy jest samowystarczalny (CSS inline), działa też otwarty dw
 `scripts/hook-sesja.sh` jako hook `UserPromptSubmit` odpala `sprint-widok.sh` sam, na frazy „zaczynamy sesję”, „checkpoint”, „koniec sesji” itp., zanim model zacznie odpowiadać (wymaga `SPRINT.md` i backlogu w repo, `jq`). `hook-post.sh` (`PostToolUse` na Write/Edit) po zapisie pliku w `docs/html/plans/` lub `reports/` sam odświeża stronę sesji, więc plan i raport lądują w zakładkach jednej strony. W `~/.claude/settings.json`:
 ```json
 {"hooks":{"UserPromptSubmit":[{"hooks":[{"type":"command","command":"bash ~/.claude/skills/widoki/scripts/hook-sesja.sh","timeout":60}]}],
-"PostToolUse":[{"matcher":"Write|Edit","hooks":[{"type":"command","command":"bash ~/.claude/skills/widoki/scripts/hook-post.sh","timeout":60}]}]}}
+"PostToolUse":[{"matcher":"Write|Edit","hooks":[{"type":"command","command":"bash ~/.claude/skills/widoki/scripts/hook-post.sh","timeout":60}]},{"matcher":"Bash","hooks":[{"type":"command","command":"bash ~/.claude/skills/widoki/scripts/hook-test.sh","timeout":90}]}],
+"Stop":[{"hooks":[{"type":"command","command":"bash ~/.claude/skills/widoki/scripts/hook-stop.sh","timeout":10}]}]}}
 ```
 
 ## Komentarze

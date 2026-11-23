@@ -44,5 +44,12 @@ Moment wywołania:
 - **end-session:** po kroku 11: `node <S>/scripts/raport.mjs <CHANGELOG> <nr> docs/html/reports/checkpoint-<nr>.html --znaczniki <rejestr>` (szkice ekranów opcjonalnie), potem skrypt. Raport powstaje po commicie wydania i nie jest do niego dodawany.
 Otwarcie w Lavish (`lavish.sh` + `poll` jako zadanie tła) tylko na prośbę użytkownika albo gdy chce adnotować; nigdy `share`.
 
+### Po wgraniu na test: zakładka „Do sprawdzenia” (od 2026-11-23, wymuszone hookami)
+Po każdym wgraniu na test agent zapisuje narzędziem Write `docs/html/sessions/do-sprawdzenia.md`: nagłówek z adresem testu, jedno zdanie co weszło, numerowana lista „Do sprawdzenia” (akcja → wynik, kod `#NN`) ze wszystkimi niepotwierdzonymi punktami. `sprint-widok.sh` robi z niej pierwszą zakładkę strony sesji (`scripts/sprawdzenie.mjs`). Nie polega to na pamięci modelu:
+- `hook-test.sh` (PostToolUse, Bash): komenda wgrania z `SPRINT.md` (linia „Wgranie”, pierwszy fragment w backtickach) → odświeża stronę sesji, zostawia znacznik `docs/html/sessions/.wgranie-test` i każe zapisać listę;
+- `hook-post.sh` (PostToolUse, Write|Edit): zapis listy, planu albo raportu → odświeża stronę sesji;
+- `hook-stop.sh` (Stop): po wgraniu bez nowszej listy zatrzymuje zakończenie odpowiedzi (raz na turę).
+Okno Lavisha nie ma „Send & End”, „End session” ani „Publish link” (`scripts/lavish-latka.sh` na przypiętej wersji, wołany przez `lavish.sh`), a `sprint-widok.sh` otwiera sesję z `--reopen`, więc strona sesji zawsze wraca i jest aktualna.
+
 ### Triaż i edytory (kolejne etapy)
 Zaplanowane, jeszcze niezbudowane: triaż zgłoszeń i edytory z eksportem do .md. Do czasu budowy: nie udawaj, że istnieją.

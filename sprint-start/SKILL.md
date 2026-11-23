@@ -96,6 +96,8 @@ odpowiedzi jest błędem skilla. Jeśli cel podał już w poleceniu, tabela i ta
    Zmiana mechaniki, wzoru czy logiki bez śladu w interfejsie → wpis `ukryta` z widokiem, którego dotyczy (panel).
 2. Wtedy **od razu, bez pytania** wgraj ją na test komendą z sekcji **Środowisko testowe** i sprawdź wgranie.
 3. Zaraz potem numerowana lista **„Do sprawdzenia”** z adresem testu: akcja → oczekiwany wynik, po punkcie na zmianę.
+   Tę samą listę (z adresem testu i zdaniem, co weszło) zapisz narzędziem Write do `docs/html/sessions/do-sprawdzenia.md`:
+   to odświeża zakładkę „Do sprawdzenia” na stronie sesji (skill `widoki`; hooki `hook-test.sh` / `hook-stop.sh` tego pilnują).
 4. Uwagi użytkownika → poprawki → ponowne wgranie → nowa lista (tylko punkty, których dotyczyła poprawka).
    **Niesprawdzone zawsze w całości:** w każdej odpowiedzi, w której jest lista „Do sprawdzenia”, wypisz WSZYSTKIE punkty,
    które użytkownik jeszcze nie potwierdził (także z poprzednich wgrań), a nie tylko nowe. Odhaczone usuwaj dopiero po
