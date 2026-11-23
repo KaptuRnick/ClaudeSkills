@@ -12,6 +12,9 @@ while true; do
       echo "KOMENTARZ Z LAVISHA (sesja.html) — zastosuj i odpowiedz przez lavish.sh reply:"
       grep -v '^---' "$T" | grep -v '^prompts\['
       cat "$T" >> "$D/komentarze.done"; rm -f "$T"
+      # Strona sesji od razu z niebieskimi ramkami na skomentowanych miejscach (bez ponownego otwierania Lavisha).
+      R="$(cd "$D/../../.." && pwd)"; B=""; for f in BACKLOG.md docs/BACKLOG.md docs/backlog.md backlog.md; do [ -f "$R/$f" ] && { B="$f"; break; }; done
+      [ -n "$B" ] && (cd "$R" && WIDOKI_LAVISH=0 "$(dirname "$0")/sprint-widok.sh" "$B" "$(basename "$R")" >/dev/null 2>&1 &)
     }
   fi
   sleep 1

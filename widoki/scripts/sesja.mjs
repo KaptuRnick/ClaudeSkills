@@ -5,6 +5,7 @@
 // dokumentu. Izolację stylów, identyfikatorów i skryptów robi sesja-widok.mjs. Po zmianie widoku uruchom ponownie.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { stylKomentarzy } from './sesja-komentarze.mjs';
 import { skladajWidok, SKRYPT_ZAKRESU } from './sesja-widok.mjs';
 
 const args = process.argv.slice(2);
@@ -34,6 +35,10 @@ section[data-widok]{display:block;min-height:calc(100vh - 48px)}
 section[data-widok][hidden]{display:none!important}
 </style>
 ${panels.map((p) => `<style>\n${p.css}\n</style>`).join('\n')}
+<style>
+/* Komentarze z Lavisha czekające na poprawkę (sesja-komentarze.mjs) */
+${stylKomentarzy(dirname(resolve(out)))}
+</style>
 </head><body>
 <nav class="sesja-zakladki" role="tablist"><b>${esc(title)}</b>${panels.map((p, i) => `<button role="tab" data-i="${i}" aria-selected="false">${esc(p.n)}</button>`).join('')}</nav>
 ${panels.map((p, i) => `<section data-widok="${i}" aria-label="${esc(p.n)}"${p.klasa ? ` class="${esc(p.klasa)}"` : ''} hidden>\n${p.body}\n</section>`).join('\n')}
