@@ -59,7 +59,12 @@ wpisu wydania w changelogu i dokumentacji (sekcja „Do wydania” z kroku 3 to 
 przebiegu należą do `end-session`. Pułapki z sekcji Git (np. weryfikacja staged) obowiązują.
 
 **5. Podsumowanie** (krótko): `go:` kody i nazwy · `nogo:` kody i nazwy · do wycofania z produkcji przy końcu sesji ·
-hash commita. Listy „Do sprawdzenia” z niepotwierdzonymi punktami nie kasuj — zostaje do kolejnych wgrań.
+hash commita · **stan celu sprintu**: plan zrobiony w całości albo „checkpoint w trakcie sprintu” z listą kroków i kodów
+planu, które jeszcze zostały (Andrzej 2026-11-24: checkpoint po kroku 2 z 6 wyglądał jak koniec pracy).
+**Checkpoint nie zatrzymuje sprintu.** Zatwierdzony plan ma jeszcze kroki → w tej samej turze, zaraz po podsumowaniu i
+widoku HTML, bierz następny krok planu (praca, test, lista „Do sprawdzenia”), bez pytania „czy jedziemy dalej” i bez
+czekania na sygnał. Zatrzymanie tylko, gdy plan jest skończony, Andrzej wprost każe czekać albo następny krok wymaga jego
+decyzji. Listy „Do sprawdzenia” z niepotwierdzonymi punktami nie kasuj — zostaje do kolejnych wgrań.
 Pod podsumowaniem **zawsze pełna tabela backlogu** (decyzja Andrzeja 2026-11-18) wg
 `../sprint-start/reference/tabela-backlogu.md` i kolumn z kontraktu: cała lista, bez skrótów. Bez pytania „co dalej”.
 

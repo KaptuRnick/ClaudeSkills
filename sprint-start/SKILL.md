@@ -118,7 +118,8 @@ odpowiedzi jest błędem skilla. Jeśli cel podał już w poleceniu, tabela i ta
 8. `prod-nogo` nie znika z testu: przechodzi na kolejne sesje z czerwoną obwódką, aż checkpoint da `prod-go`.
 9. **Wszystko ok i brak uwag ⇒ checkpoint (Andrzej 2026-11-23).** Gdy każdy punkt bieżącej listy „Do sprawdzenia” ma „ok”
    (albo „tak ma działać”) i nie ma żadnej uwagi — ani przy punktach, ani w polu „Dodatkowe uwagi” widoku — od razu, bez pytania,
-   uruchom `sprint-checkpoint`. **Koniec sesji (`end-session`) nigdy z własnej inicjatywy**: tylko na wyraźne polecenie Andrzeja
+   uruchom `sprint-checkpoint`, a po nim od razu następny krok zatwierdzonego planu (checkpoint to zapis postępu, nie przerwa
+   w sprincie; Andrzej 2026-11-24). **Koniec sesji (`end-session`) nigdy z własnej inicjatywy**: tylko na wyraźne polecenie Andrzeja
    („koniec sesji”, `/end-session`, komentarz w widoku). Pytanie o produkcję to nie polecenie wydania. Uwagi z „Dodatkowych uwag”
    trafiają do `BACKLOG.md` w tej samej turze, jak każda uwaga z testów.
 Kontrakt z `brak` w sekcji testu: pkt 2–4 nie obowiązują, lista „co przetestować” przychodzi po wydaniu w końcu sesji.
