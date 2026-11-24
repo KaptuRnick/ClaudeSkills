@@ -37,6 +37,7 @@ sesji**: tagi i bazy działają bez zmian. Na końcu zaproponuj poprawkę słown
 - [ ] 8. Dokumentacja zgodna z kodem i decyzjami + changelog + dziennik / pamięć
 - [ ] 8a. Makieta (czysty HTML, bez JS) wygenerowana z kodu wydania na wzorcu i dodana do commita (albo: zbudowana od zera, albo: brak UI)
 - [ ] 9. Commit + tag + push / wdrożenie wg kontraktu i weryfikacja produkcji (makieta w commicie)
+- [ ] 9b. Czynności po wdrożeniu z kontraktu (np. zgłoszenia wydanych wpisów → „Wdrożone”; albo: brak)
 - [ ] 10. Rejestr wgrany na test (zielone obwódki znikają, czerwone zostają)
 - [ ] 11. Domknięcie: podsumowanie + pełna tabela backlogu
 ```
@@ -112,12 +113,18 @@ z tego wydania. Tag, push i wdrożenie — komendami z kontraktu. Po commicie sp
 **Git**); plik makiety zmieniony w 8a musi być w `git show --stat HEAD`. Nie ma go → dołóż (`git commit --amend`)
 **przed** tagiem i pushem. Po wdrożeniu — weryfikacja z kontraktu i obecność rejestru z kroku 3 na produkcji.
 
+**9b. Czynności po wdrożeniu z kontraktu.** Sekcja **Wydanie** (albo **Zgłoszenia**) kontraktu może opisywać kroki po
+udanym wdrożeniu, np. status „Wdrożone” dla zgłoszeń z pola `Zgłoszenia:` wydanych wpisów backlogu. Przejdź po każdym
+wpisie przeniesionym w kroku 7 do changelogu; ma takie pole → uruchom komendę z kontraktu dla każdego id i sprawdź wynik.
+W domknięciu wypisz, które zgłoszenia dostały status (albo „brak zgłoszeń w wydanych wpisach”). Wpis częściowo wydany
+(część elementów `prod-nogo`) nie zamyka zgłoszenia. Kontrakt bez takich kroków → pomijasz.
+
 **10. Czysta karta na test.** Wgraj rejestr na test (komenda z sekcji **Znaczniki**): wydane (`prod`) tracą status
 go i obwódkę i znikają z panelu „Zmiany”; zostają tylko `prod-nogo` (czerwone). Sprawdź: bez `nogo` panel pokazuje
 „Zmiany · 0” na zielono, a na ekranach nie ma żadnych ramek — nowa sesja zaczyna od czystej karty.
 
 **11. Domknięcie:** **weszło na produkcję** (po punkcie, z kodem) · **wycofane z produkcji** · **czeka w teście (nogo)**
-· zaktualizowane dokumenty (plik: co zmieniono) · makieta (plik, liczba ekranów, commit; albo „zbudowana od zera” / „brak UI”) · pełna tabela
+· zgłoszenia oznaczone „Wdrożone” (krok 9b) · zaktualizowane dokumenty (plik: co zmieniono) · makieta (plik, liczba ekranów, commit; albo „zbudowana od zera” / „brak UI”) · pełna tabela
 backlogu. Bez listy „Do sprawdzenia” (sprawdzono na
 teście); wyjątek: `brak` w sekcji **Środowisko testowe** → lista „co przetestować” po wydaniu. Nie pytaj „co dalej”.
 
