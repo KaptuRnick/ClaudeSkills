@@ -112,6 +112,7 @@ zapisanego **wzorca** (wypełniony stan danych przykładowych + lista ekranów w
 z tego wydania. Tag, push i wdrożenie — komendami z kontraktu. Po commicie sprawdź, że weszło (pułapki z sekcji
 **Git**); plik makiety zmieniony w 8a musi być w `git show --stat HEAD`. Nie ma go → dołóż (`git commit --amend`)
 **przed** tagiem i pushem. Po wdrożeniu — weryfikacja z kontraktu i obecność rejestru z kroku 3 na produkcji.
+W Code Mode krok 9 dzielisz na osobne skrypty (sekcja **Code Mode** niżej).
 
 **9b. Czynności po wdrożeniu z kontraktu.** Sekcja **Wydanie** (albo **Zgłoszenia**) kontraktu może opisywać kroki po
 udanym wdrożeniu, np. status „Wdrożone” dla zgłoszeń z pola `Zgłoszenia:` wydanych wpisów backlogu. Przejdź po każdym
@@ -127,6 +128,18 @@ go i obwódkę i znikają z panelu „Zmiany”; zostają tylko `prod-nogo` (cze
 · zgłoszenia oznaczone „Wdrożone” (krok 9b) · zaktualizowane dokumenty (plik: co zmieniono) · makieta (plik, liczba ekranów, commit; albo „zbudowana od zera” / „brak UI”) · pełna tabela
 backlogu. Bez listy „Do sprawdzenia” (sprawdzono na
 teście); wyjątek: `brak` w sekcji **Środowisko testowe** → lista „co przetestować” po wydaniu. Nie pytaj „co dalej”.
+
+## Code Mode (sesja `klaudiusz`)
+Dotyczy tylko sesji, w której masz narzędzie `REPL` (Code Mode: Claude pisze skrypty JS wołające narzędzia). Bez niego
+każde wywołanie i tak idzie osobno — sekcję pomijasz. Kroki 1–8a, 10 i 11 możesz łączyć w skrypty dowolnie. Krok 9 —
+**nigdy jeden skrypt od commita po produkcję** (Andrzej 2026-11-24):
+1. **Skrypt lokalny:** commit + tag + kontrola z kroku 9 (`git show --stat HEAD`, makieta w commicie). Bez pusha.
+   Wynik pokaż w odpowiedzi, zanim ruszysz dalej.
+2. **Skrypt produkcyjny — osobny, tylko:** push + wdrożenie. Komendy wpisane dosłownie z kontraktu, nie składane w
+   locie (hooki i klasyfikator widzą treść skryptu, nie wartości wyliczone w trakcie). Pierwszy błąd → `throw`, bez
+   łapania i bez kolejnych kroków; naprawa w nowym skrypcie po ocenie wyniku.
+3. **Weryfikacja produkcji** — osobny skrypt, tylko odczyt.
+4. **Krok 9b** (statusy u osób trzecich) — osobny skrypt, po udanej weryfikacji.
 
 ## Widok HTML (obowiązkowy krok końcowy)
 Po domknięciu z kroku 11, w tej samej turze: raport wydania `node ~/.claude/skills/widoki/scripts/raport.mjs <CHANGELOG> <nr> docs/html/reports/checkpoint-<nr>.html --znaczniki <rejestr>` (po commicie wydania, nie wchodzi do niego), potem `~/.claude/skills/widoki/scripts/sprint-widok.sh <backlog z kontraktu> "<Projekt>"` (zakładka Sesja dołącza się sama) i przepisz linię z adresem. Błędy: jedna linia „widok HTML pominięty: …”, nie blokują wydania.
